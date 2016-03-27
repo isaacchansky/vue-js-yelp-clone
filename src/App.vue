@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Search></Search>
-    {{searchData.total}}
+    <Business-Collection :data="searchData"></Business-Collection>
     <p v-show="isLoading">
       loading...
     </p>
@@ -10,11 +10,13 @@
 
 <script>
 import Search from './components/Search'
+import BusinessCollection from './components/BusinessCollection'
 import store from './vuex/store'
 
 export default {
   components: {
-    Search
+    Search,
+    BusinessCollection
   },
   vuex: {
     getters: {

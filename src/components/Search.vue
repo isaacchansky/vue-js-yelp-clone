@@ -8,7 +8,6 @@
       <button type="button" name="button" @click="search({ term: term, location: location})">submit</button>
     </form>
 
-    {{ combined }}
   </div>
 </template>
 
@@ -22,14 +21,23 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-      term: '',
-      location: '',
+      term: this.$route.query.term,
+      location: this.$route.query.location,
       message: null
     }
   },
   vuex: {
     actions: {
-      search: search
+      search: function (store, params) {
+        this.$router.go({
+          name: 'search',
+          query: {
+            term: params.term,
+            location: params.location
+          }
+        })
+        search(store, params)
+      }
     }
   }
 }

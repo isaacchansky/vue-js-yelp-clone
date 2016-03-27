@@ -1,6 +1,8 @@
 <template>
   <div class="Business" id="{{data.id}}">
+    <img src="{{data.image_url}}" alt="" />
     <h2>{{data.name}}</h2>
+    <h5>{{data.rating}}<span>/5</span></h5>
     <p>
       {{data.snippet_text}}
     </p>
@@ -8,12 +10,9 @@
       {{ data.is_closed ? 'Currently closed.': 'Open for business!'}}
     </p>
     <p>
-      {{data.location}}
-      On {{data.location.cross_streets}} in {{data.location.neighborhoods}}
-      <br>
-      More specifically...
+      
       <small>
-        {{data.location.address}}
+        {{address}}
       </small>
     </p>
   </div>
@@ -23,7 +22,7 @@
 export default {
   computed: {
     address: function () {
-      return `${this.data.location.address[0]} ${this.data.location.city} ${this.data.location.state_code} ${this.data.location.postal_code}`
+      return this.data.display_address.join(' ')
     }
   },
   props: {

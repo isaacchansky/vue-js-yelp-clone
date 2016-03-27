@@ -5,18 +5,20 @@
     </p>
     {{data.total}} {{ data.total | pluralize 'result' }}
     <Business v-for="business in data.businesses" :data="business">
-      
-    </Business>
 
+    </Business>
+    <Map :businesses="data.businesses" :center="[data.region.center.latitude, data.region.center.longitude]"> </Map>
   </div>
 </template>
 
 <script>
 import Business from './Business'
+import Map from './Map'
 
 export default {
   components: {
-    Business
+    Business,
+    Map
   },
   props: {
     data: {

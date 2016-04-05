@@ -1,20 +1,16 @@
 <template>
   <div class="Business" id="{{data.id}}">
-    <img src="{{data.image_url}}" alt="" />
-    <h2>{{data.name}}</h2>
-    <h5>{{data.rating}}<span>/5</span></h5>
-    <p>
-      {{data.snippet_text}}
-    </p>
-    <p>
-      {{ data.is_closed ? 'Currently closed.': 'Open for business!'}}
-    </p>
-    <p>
-      
-      <small>
-        {{address}}
-      </small>
-    </p>
+    <header>
+      <img :src="data.image_url" alt="" />
+      <div class="header-content">
+        <h2>{{data.name}}</h2>
+        <small>
+          {{ data.phone | phone }}
+          {{address}}
+        </small>
+        <h5>rating: {{data.rating}}<span>/5</span> ({{data.review_count}} {{ data.review_count | pluralize 'review' }}) | {{ data.is_closed ? 'Closed': 'Open'}}</h5>
+      </div>
+    </header>
   </div>
 </template>
 
@@ -22,7 +18,7 @@
 export default {
   computed: {
     address: function () {
-      return this.data.display_address.join(' ')
+      return this.data.location.display_address.join(' ')
     }
   },
   props: {
@@ -42,3 +38,26 @@ export default {
   }
 }
 </script>
+
+
+<style scoped>
+  .Business {
+    box-shadow: 0 0 6px 0px rgba(0,0,0,0.2);
+    margin-bottom: 2em;
+  }
+  header > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .header-content {
+    padding: 0.5em;
+  }
+  .header-content h2,
+  .header-content h5 {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+  }
+  section {
+    padding: 0.5em;
+  }
+</style>

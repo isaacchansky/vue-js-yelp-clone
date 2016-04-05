@@ -1,29 +1,29 @@
 <template>
   <div class="Map">
-    <button type="button" @click="refresh()">refresh</button>
-    <div id="business-map">
-
-    </div>
+    <div id="business-map"></div>
   </div>
 </template>
 
 <script>
-var myLayer
+var businessMapLayer, map
+
 export default {
   props: {
     businesses: {
       type: Array,
-      required: true
+      required: true,
+      default: () => []
     },
     center: {
       required: true,
       type: Array,
-      length: 2
+      length: 2,
+      default: () => [0, 0]
     }
   },
 
-  methods: {
-    refresh: function () {
+  watch: {
+    businesses: function () {
       var geojson = {
         type: 'FeatureCollection',
         features: this.businesses.map(function (b) {
@@ -31,7 +31,7 @@ export default {
             type: 'Feature',
             properties: {
               title: b.name,
-              'marker-color': '#f86767',
+              'marker-color': '#466C3D',
               'marker-size': 'small'
             },
             geometry: {
@@ -44,18 +44,25 @@ export default {
           }
         })
       }
-      myLayer.setGeoJSON(geojson)
+      businessMapLayer.setGeoJSON(geojson)
+      map.fitBounds(businessMapLayer.getBounds())
+      map.dragging.disable()
+      map.touchZoom.disable()
+      map.doubleClickZoom.disable()
+      map.scrollWheelZoom.disable()
+      map.keyboard.disable()
     }
   },
+
   ready () {
     window.L.mapbox.accessToken = 'pk.eyJ1IjoiaWNoYW5za3kiLCJhIjoiVHVfWmxJbyJ9.aEnFoqckTCgX6J3z5eutlQ'
-    var map = window.L.mapbox.map('business-map', 'mapbox.light').setView(this.center, 14)
-    myLayer = window.L.mapbox.featureLayer().addTo(map)
+    map = window.L.mapbox.map('business-map', 'mapbox.light').setView(this.center, 14)
+    businessMapLayer = window.L.mapbox.featureLayer().addTo(map)
 
-    myLayer.on('mouseover', function (e) {
+    businessMapLayer.on('mouseover', function (e) {
       e.layer.openPopup()
     })
-    myLayer.on('mouseout', function (e) {
+    businessMapLayer.on('mouseout', function (e) {
       e.layer.closePopup()
     })
 
@@ -79,7 +86,12 @@ export default {
         }
       })
     }
-    myLayer.setGeoJSON(geojson)
+    businessMapLayer.setGeoJSON(geojson)
+    map.dragging.disable()
+    map.touchZoom.disable()
+    map.doubleClickZoom.disable()
+    map.scrollWheelZoom.disable()
+    map.keyboard.disable()
   },
   data () {
     return {
@@ -93,9 +105,16 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
+  .Map {
+    position: fixed;
+    top: 5.5rem;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
   #business-map {
     width: 100%;
-    height: 500px;
+    height: 33vh;
   }
 </style>

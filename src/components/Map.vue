@@ -45,6 +45,7 @@ export default {
         })
       }
       businessMapLayer.setGeoJSON(geojson)
+      map.invalidateSize()
       map.fitBounds(businessMapLayer.getBounds())
       map.dragging.disable()
       map.touchZoom.disable()
@@ -73,7 +74,7 @@ export default {
           type: 'Feature',
           properties: {
             title: b.name,
-            'marker-color': '#f86767',
+            'marker-color': '#466C3D',
             'marker-size': 'small'
           },
           geometry: {

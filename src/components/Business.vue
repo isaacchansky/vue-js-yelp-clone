@@ -1,5 +1,5 @@
 <template>
-  <div class="Business" id="{{data.id}}">
+  <div class="Business" id="{{data.id}}" transition="fade">
     <header>
       <img :src="data.image_url" alt="" />
       <div class="header-content">
@@ -59,5 +59,16 @@ export default {
   }
   section {
     padding: 0.5em;
+  }
+  .fade-transition {
+    transition: all 250ms ease-in-out;
+    opacity: 1;
+    top: 0;
+    position: relative;
+  }
+  .fade-enter,
+  .fade-leave {
+    top: 2em;
+    opacity: 0;
   }
 </style>

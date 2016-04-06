@@ -2,9 +2,11 @@
   <div id="app">
     <Search></Search>
     <Business-Collection :data="searchData"></Business-Collection>
-    <p v-show="isLoading">
-      loading...
-    </p>
+    <section class="loading" v-show="isLoading">
+      <p>
+        loading...
+      </p>
+    </section>
   </div>
 </template>
 
@@ -28,6 +30,21 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  .loading:before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.75);
+  }
+  .loading p {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    color: #fff;
+  }
 </style>

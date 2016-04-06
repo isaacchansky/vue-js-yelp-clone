@@ -16,8 +16,8 @@
 
   </div>
   <Map :businesses="data.businesses" :center="[data.region.center.latitude, data.region.center.longitude]" v-show="!isEmpty" transition="fade"> </Map>
-  <section class="back-up" v-show="!isEmpty"  transition="fade">
-    <button>Back to Map!</button>
+  <section class="bottom" v-show="!isEmpty"  transition="fade">
+    <a href="#" v-link="'about'"> about </a>
   </section>
 </template>
 
@@ -94,16 +94,14 @@ export default {
     color: #ccc;
   }
 
-  .back-up {
+  .bottom {
     background: #333;
     width: 100%;
     padding: 5rem 0;
     text-align: center;
   }
-  .back-up button {
-    border: none;
+  .bottom a {
     color: white;
-    background: none;
   }
 
   .fade-transition {

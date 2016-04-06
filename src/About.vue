@@ -1,10 +1,11 @@
 <template>
   <div id="about">
-    <h1>Uppers &amp; Downers</h1>
+    <h1>Grab data from yelp and dump in on the screen. </h1>
     <p>
-      A yelp app to find what you need :)
+      yay!
     </p>
   </div>
+  <a href="#" v-link="'search'"> back to search</a>
 </template>
 
 <script>

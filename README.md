@@ -1,4 +1,4 @@
-# uppersdowners
+# vue-js-yelp-clone
 
 > A Vue.js project
 

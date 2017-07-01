@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+[Uses this passthrough API](https://github.com/isaacchansky/yelp-passthrough-basic-search-api)
+
 ## Build Setup
 
 ``` bash
